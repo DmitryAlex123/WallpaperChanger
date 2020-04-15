@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="107.0" prefWidth="252.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.wallChangerController">
+   <children>
+      <ComboBox fx:id="combobox" layoutX="13.0" layoutY="38.0" prefHeight="25.0" prefWidth="226.0" />
+      <Label layoutX="18.0" layoutY="10.0" text="Интервал смены изображений:">
+         <font>
+            <Font name="Garamond" size="17.0" />
+         </font>
+      </Label>
+      <Button fx:id="in" layoutX="68.0" layoutY="68.0" mnemonicParsing="false" onAction="#start" prefHeight="25.0" prefWidth="118.0" text="Запуск" />
+      <Button fx:id="out" layoutX="68.0" layoutY="67.0" mnemonicParsing="false" onAction="#exit" prefHeight="25.0" prefWidth="118.0" text="Выход" />
+   </children>
+</AnchorPane>
