@@ -6,6 +6,7 @@ import com.sun.jna.win32.W32APIOptions;
 import controller.wallChangerController;
 import model.NumPath;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -13,16 +14,17 @@ import java.util.TimerTask;
 
 public class ChagneImage extends TimerTask {
 
-    ArrayList<NumPath> pathList = wallChangerController.getPathList();
+    ArrayList<File> folderItemsList = wallChangerController.getList();
+
     Random random = new Random();
     static int reload;
 
     public void run() {
-        int i = random.nextInt(17);
+        int i = random.nextInt(folderItemsList.size());
         if (reload == i){
-            i = random.nextInt(17);
+            i = random.nextInt(folderItemsList.size());
         }
-        String path = pathList.get(i).getPath();
+        String path = folderItemsList.get(i).getPath();
         User32.INSTANCE.SystemParametersInfo(0x0014, 0, path , 1);
         reload = i;
     }

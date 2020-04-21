@@ -1,5 +1,6 @@
 package controller;
 
+import com.sun.corba.se.impl.resolver.SplitLocalResolverImpl;
 import com.sun.javafx.collections.ElementObservableListDecorator;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -12,6 +13,8 @@ import model.NumPath;
 import model.timing;
 import pogorelov.ChagneImage;
 import pogorelov.Main;
+
+import java.io.File;
 import java.net.URL;
 import java.util.*;
 
@@ -26,36 +29,20 @@ public class wallChangerController implements Initializable {
     @FXML
     Button in;
 
-    private static ArrayList<NumPath> pathList;
-
-    public static ArrayList<NumPath> getPathList(){
-        return pathList;
+    private static ArrayList<File> folderItemsList = new ArrayList<>();
+    public static ArrayList<File> getList(){
+        return folderItemsList;
     }
 
     public void initialize(URL location, ResourceBundle resources) {
         out.setVisible(false);
-        pathList = new ArrayList<NumPath>();
-        pathList.add(new NumPath(0, "C:\\Users\\pdai\\Pictures\\Мои обои\\1.jpg"));
-        pathList.add(new NumPath(1, "C:\\Users\\pdai\\Pictures\\Мои обои\\2.jpg"));
-        pathList.add(new NumPath(2, "C:\\Users\\pdai\\Pictures\\Мои обои\\3.jpg"));
-        pathList.add(new NumPath(3, "C:\\Users\\pdai\\Pictures\\Мои обои\\4.jpg"));
-        pathList.add(new NumPath(4, "C:\\Users\\pdai\\Pictures\\Мои обои\\5.jpg"));
-        pathList.add(new NumPath(5, "C:\\Users\\pdai\\Pictures\\Мои обои\\6.jpg"));
-        pathList.add(new NumPath(6, "C:\\Users\\pdai\\Pictures\\Мои обои\\7.jpg"));
-        pathList.add(new NumPath(7, "C:\\Users\\pdai\\Pictures\\Мои обои\\8.jpg"));
-        pathList.add(new NumPath(8, "C:\\Users\\pdai\\Pictures\\Мои обои\\9.jpg"));
-        pathList.add(new NumPath(9, "C:\\Users\\pdai\\Pictures\\Мои обои\\10.jpg"));
-        pathList.add(new NumPath(10, "C:\\Users\\pdai\\Pictures\\Мои обои\\11.jpg"));
-        pathList.add(new NumPath(11, "C:\\Users\\pdai\\Pictures\\Мои обои\\12.jpg"));
-        pathList.add(new NumPath(12, "C:\\Users\\pdai\\Pictures\\Мои обои\\13.jpg"));
-        pathList.add(new NumPath(13, "C:\\Users\\pdai\\Pictures\\Мои обои\\14.jpg"));
-        pathList.add(new NumPath(14, "C:\\Users\\pdai\\Pictures\\Мои обои\\15.jpg"));
-        pathList.add(new NumPath(15, "C:\\Users\\pdai\\Pictures\\Мои обои\\16.jpg"));
-        pathList.add(new NumPath(16, "C:\\Users\\pdai\\Pictures\\Мои обои\\17.jpg"));
 
+        for (File file : (new File(Main.userPath + "/Pictures/WallChanger").listFiles())){
+            folderItemsList.add(file);
+        };
 
         ObservableList<timing> list =  FXCollections.observableArrayList();
-        list.add(new timing("10 секунд", 10000));
+        list.add(new timing("15 секунд", 15000));
         list.add(new timing("30 секунд", 30000));
         list.add(new timing("1 минута", 60000));
         list.add(new timing("3 минуты", 180000));
@@ -64,7 +51,11 @@ public class wallChangerController implements Initializable {
 
     }
 
-    Timer timer = new Timer();
+    static Timer timer = new Timer();
+
+    public static Timer getTimer(){
+        return timer;
+    }
 
     public void start(){
         timing t = (timing) combobox.getSelectionModel().getSelectedItem();
